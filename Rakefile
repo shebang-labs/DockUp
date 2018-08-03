@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 task :default do
-  puts "Hello World"
+  puts 'Hello World'
 end
