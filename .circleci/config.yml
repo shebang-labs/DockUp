@@ -30,7 +30,7 @@ jobs:
           root: docker-image
           paths:
             - "*"
-  docker-push:
+  docker_push:
     <<: *defaults
     steps:
       - attach_workspace:
@@ -47,7 +47,7 @@ jobs:
           name: Push docker image
           command: docker push "tareksamni/dockup:${CIRCLE_SHA1}"
       # - test
-  docker-push-latest:
+  docker_push_latest:
     <<: *defaults
     steps:
       - attach_workspace:
@@ -70,10 +70,10 @@ workflows:
   build_and_push_docker_image:
     jobs:
       - build
-      - docker-push:
+      - docker_push:
           requires:
             - build
-      - docker-push-latest:
+      - docker_push_latest:
           requires:
             - build
           filters:
