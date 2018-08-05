@@ -3,8 +3,8 @@
 module Backends
   class Base
     def verify_prerequisites!
-      err = "S3 backend expects #{self.class::PREREQUISITES.join(', ')} \
-as environment variables"
+      err = "#{self.class.name.gsub(/^.*::/, '')} backend expects \
+#{self.class::PREREQUISITES.join(', ')} as environment variables"
       raise(MissingPrerequisitesError, err) unless prerequisites?
     end
 
