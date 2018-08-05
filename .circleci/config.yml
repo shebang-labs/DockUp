@@ -23,6 +23,16 @@ jobs:
           name: Push docker image
           command: docker push "tareksamni/dockup:${CIRCLE_SHA1}"
       # - test
+  docker-push-latest:
+    docker:
+      - image: docker:latest
+    requires:
+      - build
+    steps:
+      - run:
+          name: Push docker image
+          command: docker push "tareksamni/dockup:latest"
+      # - test
     filters:
       branches:
         only: master
