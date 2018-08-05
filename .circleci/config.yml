@@ -1,0 +1,18 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: docker:latest
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Login to docker hub
+          command: docker login -u $DOCKER_USER -p $DOCKER_PASS
+      - run:
+          name: Build docker image
+          command: docker build -t "tareksamni/dockup:${CIRCLE_SHA1}" .
+      - run:
+          name: Push docker image
+          command: docker push "tareksamni/dockup:${CIRCLE_SHA1}"
