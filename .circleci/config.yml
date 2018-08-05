@@ -16,8 +16,6 @@ jobs:
   docker-push:
     docker:
       - image: docker:latest
-    requires:
-      - build
     steps:
       - run:
           name: Push docker image
@@ -26,13 +24,23 @@ jobs:
   docker-push-latest:
     docker:
       - image: docker:latest
-    requires:
-      - build
     steps:
       - run:
           name: Push docker image
           command: docker push "tareksamni/dockup:latest"
       # - test
-    filters:
-      branches:
-        only: master
+
+workflows:
+  version: 2
+  build-push-image:
+    jobs:
+      - build
+      - docker-push:
+          requires:
+            - build
+      - docker-push-latest:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
