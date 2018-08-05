@@ -1,8 +1,12 @@
+defaults: &defaults
+  working_directory: /app
+  docker:
+    - image: docker:latest
+
 version: 2
 jobs:
   build:
-    docker:
-      - image: docker:latest
+    <<: *defaults
     steps:
       - checkout
       - setup_remote_docker:
@@ -12,19 +16,50 @@ jobs:
           command: docker login -u $DOCKER_USER -p $DOCKER_PASS
       - run:
           name: Build docker image
-          command: docker build -t "tareksamni/dockup:${CIRCLE_SHA1}" .
+          command: docker build -t "tareksamni/dockup:${CIRCLE_SHA1}" -t "tareksamni/dockup:latest" .
+      - run:
+          name: Create docker-image cache dir
+          command: mkdir -p /app/docker-image
+      - run:
+          name: Cache built docker image
+          command: docker image save --output "docker-image/${CIRCLE_SHA1}" "tareksamni/dockup:${CIRCLE_SHA1}"
+      - run:
+          name: Cache latest built docker image
+          command: docker image save --output "docker-image/latest" "tareksamni/dockup:latest"
+      - persist_to_workspace:
+          root: docker-image
+          paths:
+            - "*"
   docker-push:
-    docker:
-      - image: docker:latest
+    <<: *defaults
     steps:
+      - attach_workspace:
+          at: docker-image
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Login to docker hub
+          command: docker login -u $DOCKER_USER -p $DOCKER_PASS
+      - run:
+          name: Load previously built docker image
+          command: docker image load --input "docker-image/${CIRCLE_SHA1}"
       - run:
           name: Push docker image
           command: docker push "tareksamni/dockup:${CIRCLE_SHA1}"
       # - test
   docker-push-latest:
-    docker:
-      - image: docker:latest
+    <<: *defaults
     steps:
+      - attach_workspace:
+          at: docker-image
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Login to docker hub
+          command: docker login -u $DOCKER_USER -p $DOCKER_PASS
+      - run:
+          name: Load previously built docker image
+          command: docker image load --input "docker-image/latest"
       - run:
           name: Push docker image
           command: docker push "tareksamni/dockup:latest"
@@ -32,7 +67,7 @@ jobs:
 
 workflows:
   version: 2
-  build-push-image:
+  build_and_push_docker_image:
     jobs:
       - build
       - docker-push:
