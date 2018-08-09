@@ -17,7 +17,7 @@ RUN gem install bundler
 RUN bundle install
 
 # Copy code to app dir
-ADD . $APP_HOME
+COPY . $APP_HOME
 RUN chown -R app:app $APP_HOME
 
 # Set active user - never use root

@@ -8,6 +8,15 @@ module Backends
       raise(MissingPrerequisitesError, err) unless prerequisites?
     end
 
+    def upload(path)
+      entries = Dir.glob(File.join(path, '**'))
+      entries.each do |entry|
+        entry.gsub!('./', '')
+        upload_file(entry) if File.file?(entry)
+        upload(entry) if File.directory?(entry)
+      end
+    end
+
     private
 
     def prerequisites?

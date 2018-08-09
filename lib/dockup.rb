@@ -7,7 +7,7 @@ class DockUp
     @uploader.verify_prerequisites!
   end
 
-  def upload
-    @uploader.upload
+  def upload(path)
+    @uploader.upload(path)
   end
 end
