@@ -26,7 +26,7 @@ push-docker:
 # target: run-docker - publishes API image.
 .PHONY: run-docker
 run-docker: build-docker
-	# $(DOCKER) push $(DOCKER_IMAGE)
+	$(DOCKER) push $(DOCKER_IMAGE)
 	$(DOCKER) run \
 	-e DockUpStrategy=s3 \
 	-e DockUpSrc=. \

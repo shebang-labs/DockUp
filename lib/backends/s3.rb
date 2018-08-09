@@ -10,6 +10,13 @@ module Backends
                         AWS_REGION
                         AWS_BUCKET ].freeze
 
+    def initialize
+      super
+      resource = Aws::S3::Resource.new(region: region)
+      return if resource.bucket(bucket).exists?
+      client.create_bucket(bucket: bucket)
+    end
+
     def upload_file(file)
       File.open(file) do |body|
         client.put_object(bucket: bucket, key: file, body: body)

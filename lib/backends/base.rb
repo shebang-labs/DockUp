@@ -2,6 +2,10 @@
 
 module Backends
   class Base
+    def initialize
+      verify_prerequisites!
+    end
+
     def verify_prerequisites!
       err = "#{self.class.name.gsub(/^.*::/, '')} backend expects \
 #{self.class::PREREQUISITES.join(', ')} as environment variables"
