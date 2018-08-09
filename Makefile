@@ -18,12 +18,12 @@ help:
 build-docker: Dockerfile
 	$(DOCKER) build --pull -t $(DOCKER_IMAGE) .
 
-# target: push-docker - publishes API image.
+# target: push-docker
 .PHONY: push-docker
 push-docker:
 	$(DOCKER) push $(DOCKER_IMAGE)
 
-# target: run-docker - publishes API image.
+# target: run-docker
 .PHONY: run-docker
 run-docker: build-docker
 	$(DOCKER) push $(DOCKER_IMAGE)
