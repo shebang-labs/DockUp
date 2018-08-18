@@ -1,4 +1,4 @@
-![DockUp](https://github.com/tareksamni/DockUp/blob/master/assets/logo.png)
+![DockUp](https://github.com/tareksamni/DockUp/raw/master/assets/logo.png "DockUp")
 
 [![CircleCI](https://circleci.com/gh/tareksamni/DockUp/tree/master.svg?style=svg)](https://circleci.com/gh/tareksamni/DockUp/tree/master) 
 [![Maintainability](https://api.codeclimate.com/v1/badges/a1eebc68dd2560570d76/maintainability)](https://codeclimate.com/github/tareksamni/DockUp/maintainability)
@@ -6,6 +6,7 @@
 [![Docker Stars](https://img.shields.io/docker/stars/tareksamni/dockup.svg)](https://hub.docker.com/r/tareksamni/dockup/)
 [![Docker Layers](https://images.microbadger.com/badges/image/tareksamni/dockup.svg)](https://hub.docker.com/r/tareksamni/dockup/)
 [![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/tareksamni/DockUp)
+[![GitHub top language](https://img.shields.io/github/languages/top/tareksamni/dockup.svg)](https://github.com/tareksamni/DockUp)
 
 # Welcome to DockUp
 
