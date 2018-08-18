@@ -14,8 +14,18 @@
 
 DockUp is a Docker based backup solution that supports different backends like: S3, Azure blob storage, Google cloud storage, local filesystem, etc.
 
+## Supported Backends
+
+Currently DockUp is supporting backups to:
+- AWS S3
+
+Soon and incrementally we will be adding other backends like Azure blob storage, Google cloud storage and other backends. Feel free to [contribute to DockUp](https://github.com/tareksamni/DockUp/blob/master/CONTRIBUTE.md) and add more backends.
 
 ## Getting Started
+
+### [Run using Docker](https://github.com/tareksamni/DockUp/blob/master/docs/DOCKER.md)
+### [Run using Docker-compose](https://github.com/tareksamni/DockUp/blob/master/docs/DOCKER-COMPOSE.md)
+### [Run on K8s](https://github.com/tareksamni/DockUp/blob/master/docs/KUBERNETES.md)
 
 ## Contributing
 
@@ -36,11 +46,11 @@ Trying to report a possible security vulnerability in DockUp? Please reach out t
 
 ### First Contribution
 
-Follow the dev environment setup and contribution guidelines [here](https://github.com/tareksamni/DockUp/blob/master/CONTRIBUTE.md).
+Follow the dev environment setup and contribution guidelines [here](https://github.com/tareksamni/DockUp/blob/master/docs/CONTRIBUTE.md).
 
 ### Code of Conduct
 
-You can find DockUp's code of conduct [here](https://github.com/tareksamni/DockUp/blob/master/CODE_OF_CONDUCT.md).
+You can find DockUp's code of conduct [here](https://github.com/tareksamni/DockUp/blob/master/docs/CODE_OF_CONDUCT.md).
 
 ## Code Status
 
