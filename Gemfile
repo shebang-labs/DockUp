@@ -11,3 +11,7 @@ group :development do
   gem 'overcommit', require: false
   gem 'rubocop', '~> 0.58.2', require: false
 end
+
+group :test do
+  gem 'rspec'
+end
