@@ -17,7 +17,7 @@ DockUp is a Ruby dockerized backup solution that supports different backends lik
 ## Supported Backends
 
 Currently DockUp is supporting backups to:
-- AWS S3
+- [Amazon S3](https://aws.amazon.com/s3/)
 
 Soon and incrementally we will be adding other backends like Azure blob storage, Google cloud storage and other backends. Feel free to [contribute to DockUp](https://github.com/tareksamni/DockUp/blob/master/docs/CONTRIBUTE.md) and add more backends.
 
