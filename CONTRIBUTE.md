@@ -58,7 +58,7 @@ Run `rake -T` to see the available tasks.
 
 Once you've set up the environment. From there you can run the specs, and make patches.
 
-## Patches
+### Patches
 
 Please submit a pull request or a github issue to one of the issue trackers
 listed below. If you submit an issue, please include a link to either of:
@@ -66,6 +66,6 @@ listed below. If you submit an issue, please include a link to either of:
 * a gist (or equivalent) of the patch
 * a branch or commit in your github fork of the repo
 
-## Issues
+### Issues
 
 * [https://github.com/tareksamni/DockUp/issues](https://github.com/tareksamni/DockUp/issues)
