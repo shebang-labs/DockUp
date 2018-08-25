@@ -39,3 +39,6 @@ bower.json
 
 # Ignore node_modules
 node_modules/
+
+# Mac osx finder
+.DS_Store
