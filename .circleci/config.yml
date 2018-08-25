@@ -30,11 +30,15 @@ jobs:
           root: docker-image
           paths:
             - "*"
+      - persist_to_workspace:
+          root: /app
+          paths:
+            - test.env
   lint:
     <<: *defaults
     steps:
       - attach_workspace:
-          at: docker-image
+          at: workspace
       - setup_remote_docker:
           docker_layer_caching: true
       - run:
@@ -42,7 +46,7 @@ jobs:
           command: docker login -u $DOCKER_USER -p $DOCKER_PASS
       - run:
           name: Load previously built docker image
-          command: docker image load --input "docker-image/${CIRCLE_SHA1}"
+          command: docker image load --input "workspace/${CIRCLE_SHA1}"
       - run:
           name: Rubocop
           command: docker run tareksamni/dockup:${CIRCLE_SHA1} rubocop
@@ -50,7 +54,7 @@ jobs:
     <<: *defaults
     steps:
     - attach_workspace:
-        at: docker-image
+        at: workspace
     - setup_remote_docker:
         docker_layer_caching: true
     - run:
@@ -58,15 +62,20 @@ jobs:
         command: docker login -u $DOCKER_USER -p $DOCKER_PASS
     - run:
         name: Load previously built docker image
-        command: docker image load --input "docker-image/${CIRCLE_SHA1}"
+        command: docker image load --input "workspace/${CIRCLE_SHA1}"
     - run:
         name: Run Rspecs
-        command: docker run --env-file .env-test -e "CODECLIMATE_REPO_TOKEN=$CODECLIMATE_REPO_TOKEN" tareksamni/dockup:${CIRCLE_SHA1} bundle exec rspec && bundle exec codeclimate-test-reporter
+        command: >
+            docker run
+            --env-file workspace/test.env
+            --env CODECLIMATE_REPO_TOKEN=$CODECLIMATE_REPO_TOKEN
+            tareksamni/dockup:${CIRCLE_SHA1}
+            /bin/bash -c "bundle exec rspec; bundle exec codeclimate-test-reporter"
   docker_push:
     <<: *defaults
     steps:
       - attach_workspace:
-          at: docker-image
+          at: workspace
       - setup_remote_docker:
           docker_layer_caching: true
       - run:
@@ -74,7 +83,7 @@ jobs:
           command: docker login -u $DOCKER_USER -p $DOCKER_PASS
       - run:
           name: Load previously built docker image
-          command: docker image load --input "docker-image/${CIRCLE_SHA1}"
+          command: docker image load --input "workspace/${CIRCLE_SHA1}"
       - run:
           name: Push docker image
           command: docker push "tareksamni/dockup:${CIRCLE_SHA1}"
@@ -82,7 +91,7 @@ jobs:
     <<: *defaults
     steps:
       - attach_workspace:
-          at: docker-image
+          at: workspace
       - setup_remote_docker:
           docker_layer_caching: true
       - run:
@@ -90,7 +99,7 @@ jobs:
           command: docker login -u $DOCKER_USER -p $DOCKER_PASS
       - run:
           name: Load previously built docker image
-          command: docker image load --input "docker-image/latest"
+          command: docker image load --input "workspace/latest"
       - run:
           name: Push docker image
           command: docker push "tareksamni/dockup:latest"

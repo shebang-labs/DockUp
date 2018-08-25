@@ -28,10 +28,16 @@ push-docker:
 run-docker: build-docker
 	$(DOCKER) push $(DOCKER_IMAGE)
 	$(DOCKER) run \
-	-e DockUpStrategy=s3 \
-	-e DockUpSrc=. \
-	-e AWS_BUCKET=$(AWS_BUCKET) \
-	-e AWS_REGION=$(AWS_REGION) \
-	-e AWS_ACCESS_KEY_ID=$(AWS_ACCESS_KEY_ID) \
-	-e AWS_SECRET_ACCESS_KEY=$(AWS_SECRET_ACCESS_KEY) \
+	--env-file ./env-test.list \
+	--env CODECLIMATE_REPO_TOKEN=$(CODECLIMATE_REPO_TOKEN) \
 	$(DOCKER_IMAGE)
+
+# target: test-docker
+.PHONY: test-docker
+test-docker: build-docker
+	$(DOCKER) push $(DOCKER_IMAGE)
+	$(DOCKER) run \
+	--env-file test.env \
+	--env CODECLIMATE_REPO_TOKEN=$(CODECLIMATE_REPO_TOKEN) \
+	$(DOCKER_IMAGE) \
+	/bin/bash -c "bundle exec rspec; bundle exec codeclimate-test-reporter"
