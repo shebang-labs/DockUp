@@ -46,22 +46,22 @@ jobs:
       - run:
           name: Rubocop
           command: docker run tareksamni/dockup:${CIRCLE_SHA1} rubocop
-    test:
-      <<: *defaults
-      steps:
-        - attach_workspace:
-            at: docker-image
-        - setup_remote_docker:
-            docker_layer_caching: true
-        - run:
-            name: Login to docker hub
-            command: docker login -u $DOCKER_USER -p $DOCKER_PASS
-        - run:
-            name: Load previously built docker image
-            command: docker image load --input "docker-image/${CIRCLE_SHA1}"
-        - run:
-            name: Run Rspecs
-            command: docker run --env-file ./.env-test tareksamni/dockup:${CIRCLE_SHA1} bundle exec rspec
+  test:
+    <<: *defaults
+    steps:
+    - attach_workspace:
+        at: docker-image
+    - setup_remote_docker:
+        docker_layer_caching: true
+    - run:
+        name: Login to docker hub
+        command: docker login -u $DOCKER_USER -p $DOCKER_PASS
+    - run:
+        name: Load previously built docker image
+        command: docker image load --input "docker-image/${CIRCLE_SHA1}"
+    - run:
+        name: Run Rspecs
+        command: docker run --env-file .env-test -e "CODECLIMATE_REPO_TOKEN=$CODECLIMATE_REPO_TOKEN" tareksamni/dockup:${CIRCLE_SHA1} bundle exec rspec && bundle exec codeclimate-test-reporter
   docker_push:
     <<: *defaults
     steps:
@@ -78,7 +78,6 @@ jobs:
       - run:
           name: Push docker image
           command: docker push "tareksamni/dockup:${CIRCLE_SHA1}"
-      # - test
   docker_push_latest:
     <<: *defaults
     steps:
@@ -95,7 +94,6 @@ jobs:
       - run:
           name: Push docker image
           command: docker push "tareksamni/dockup:latest"
-      # - test
 
 workflows:
   version: 2
@@ -105,14 +103,20 @@ workflows:
       - lint:
           requires:
               - build
+      - test:
+          requires:
+              - lint
+              - build
       - docker_push:
           requires:
             - build
             - lint
+            - test
       - docker_push_latest:
           requires:
             - build
             - lint
+            - test
           filters:
             branches:
               only: master
