@@ -6,12 +6,6 @@ module Backends
       verify_prerequisites!
     end
 
-    def verify_prerequisites!
-      err = "#{self.class.name.gsub(/^.*::/, '')} backend expects \
-#{self.class::PREREQUISITES.join(', ')} as environment variables"
-      raise(MissingPrerequisitesError, err) unless prerequisites?
-    end
-
     def upload(path)
       entries(path).each do |entry|
         entry.gsub!('./', '')
@@ -20,11 +14,21 @@ module Backends
       end
     end
 
+    def upload_file(_path)
+      raise(NotImplementedError)
+    end
+
     private
+
+    def verify_prerequisites!
+      err = "#{self.class.name.gsub(/^.*::/, '')} backend expects \
+#{self.class::PREREQUISITES.join(', ')} as environment variables"
+      raise(MissingPrerequisitesError, err) unless prerequisites?
+    end
 
     def entries(path)
       if File.directory?(path)
-        Dir.glob(File.join(path, '**'))
+        Dir.glob(File.join(path, '**', '*'))
       else
         [path.dup]
       end
