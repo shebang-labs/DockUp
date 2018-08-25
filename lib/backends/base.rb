@@ -13,8 +13,7 @@ module Backends
     end
 
     def upload(path)
-      entries = Dir.glob(File.join(path, '**'))
-      entries.each do |entry|
+      entries(path).each do |entry|
         entry.gsub!('./', '')
         upload_file(entry) if File.file?(entry)
         upload(entry) if File.directory?(entry)
@@ -22,6 +21,14 @@ module Backends
     end
 
     private
+
+    def entries(path)
+      if File.directory?(path)
+        Dir.glob(File.join(path, '**'))
+      else
+        [path.dup]
+      end
+    end
 
     def prerequisites?
       self.class::PREREQUISITES.all? do |prereq|

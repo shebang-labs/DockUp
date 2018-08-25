@@ -10,7 +10,7 @@ task :default do
                .collect(&:capitalize).join
 
   unless UPLOADERS_WHITELIST.include?(backend.to_sym)
-    raise(InvalidUploaderError, "#{backend} is invalid uploader")
+    raise(InvalidUploaderError, "#{backend} is not a valid uploader")
   end
 
   puts "Selected backup backend is: #{backend}"
