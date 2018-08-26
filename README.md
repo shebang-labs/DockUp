@@ -2,6 +2,7 @@
 
 [![CircleCI](https://circleci.com/gh/tareksamni/DockUp/tree/master.svg?style=svg)](https://circleci.com/gh/tareksamni/DockUp/tree/master) 
 [![Maintainability](https://api.codeclimate.com/v1/badges/a1eebc68dd2560570d76/maintainability)](https://codeclimate.com/github/tareksamni/DockUp/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/a1eebc68dd2560570d76/test_coverage)](https://codeclimate.com/github/tareksamni/DockUp/test_coverage)
 [![Docker Pulls](https://img.shields.io/docker/pulls/tareksamni/dockup.svg)](https://hub.docker.com/r/tareksamni/dockup/)
 [![Docker Stars](https://img.shields.io/docker/stars/tareksamni/dockup.svg)](https://hub.docker.com/r/tareksamni/dockup/)
 [![Docker Layers](https://images.microbadger.com/badges/image/tareksamni/dockup.svg)](https://hub.docker.com/r/tareksamni/dockup/)

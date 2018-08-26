@@ -3,3 +3,6 @@ Style/Documentation:
 
 Style/BlockComments:
   Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
