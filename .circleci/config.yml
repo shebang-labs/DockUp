@@ -69,8 +69,9 @@ jobs:
             docker run
             --env-file workspace/test.env
             --env CODECLIMATE_REPO_TOKEN=$CODECLIMATE_REPO_TOKEN
+            --env CIRCLE_BRANCH=$CIRCLE_BRANCH
             tareksamni/dockup:${CIRCLE_SHA1}
-            /bin/bash -c "bundle exec rspec; bundle exec codeclimate-test-reporter"
+            /bin/bash -c "bundle exec rspec && bundle exec codeclimate-test-reporter"
   docker_push:
     <<: *defaults
     steps:

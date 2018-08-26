@@ -28,7 +28,7 @@ push-docker:
 run-docker: build-docker
 	$(DOCKER) push $(DOCKER_IMAGE)
 	$(DOCKER) run \
-	--env-file ./env-test.list \
+	--env-file test.env \
 	--env CODECLIMATE_REPO_TOKEN=$(CODECLIMATE_REPO_TOKEN) \
 	$(DOCKER_IMAGE)
 
