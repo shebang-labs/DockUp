@@ -59,7 +59,7 @@ services:
       - DockUpBackend=s3
       - DockUpSrc=/backup
     volumes:
-      - some_local_path_to_backup:/backup
+      - some_local_path_to_backup:/backup # some_local_path_to_backup could be a folder or file
 ```
 
 ### Kubernetes example (Cron Job)
