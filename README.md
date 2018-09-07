@@ -24,9 +24,81 @@ Soon and incrementally we will be adding other backends like Azure blob storage,
 
 ## Getting Started
 
-### [Run using Docker](https://github.com/tareksamni/DockUp/blob/master/docs/DOCKER.md)
-### [Run using Docker-compose](https://github.com/tareksamni/DockUp/blob/master/docs/DOCKER-COMPOSE.md)
-### [Run on K8s](https://github.com/tareksamni/DockUp/blob/master/docs/KUBERNETES.md)
+Examples here are for AWS S3 backend, other examples for different backends could be found in these links:
+
+- [Run using Docker](https://github.com/tareksamni/DockUp/blob/master/docs/DOCKER.md)
+- [Run using Docker-compose](https://github.com/tareksamni/DockUp/blob/master/docs/DOCKER-COMPOSE.md)
+- [Run on Kubernetes](https://github.com/tareksamni/DockUp/blob/master/docs/KUBERNETES.md)
+
+### Docker example
+
+```bash
+docker run \
+  -e "AWS_ACCESS_KEY_ID=your_aws_key_id" \
+  -e "AWS_SECRET_ACCESS_KEY=your_aws_secret_key" \
+  -e "AWS_REGION=eu-west-1" \
+  -e "AWS_BUCKET=some-bucket-name" \ # this should be unique and valid (https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html)
+  -e "DockUpBackend=s3" \
+  -e "DockUpSrc=/upload" \
+  -v some_local_path:/upload \
+  tareksamni/dockup:latest
+```
+
+### docker-compose example
+
+```yml
+version: '3'
+services:
+  backup:
+    image: tareksamni/dockup:latest
+    environment:
+      - AWS_ACCESS_KEY_ID=your_aws_key_id
+      - AWS_SECRET_ACCESS_KEY=your_aws_secret_key
+      - AWS_REGION=eu-west-1
+      - AWS_BUCKET=some-bucket-name # this should be unique and valid (https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.ht
+      - DockUpBackend=s3
+      - DockUpSrc=/upload
+    volumes:
+      - some_local_path:/upload
+```
+
+### Kubernetes example (Cron Job)
+
+```yml
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: backup
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          volumes:
+            - name: shared-data
+              emptyDir: {}
+          containers:
+          - name: backup
+            image: tareksamni/dockup:tareksamni
+            volumeMounts:
+              - name: shared-data
+                mountPath: /upload
+            env:
+              - name: AWS_ACCESS_KEY_ID
+                value: "your_aws_key_id"
+              - name: AWS_SECRET_ACCESS_KEY
+                value: "your_aws_secret_key"
+              - name: AWS_REGION
+                value: "eu-west-1"
+              - name: AWS_BUCKET
+                value: "some-bucket-name" # this should be unique and valid(https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.ht
+              - name: DockUpBackend
+                value: "s3"
+              - name: DockUpSrc
+                value: "/upload"
+          restartPolicy: OnFailure
+```
 
 ## Contributing
 

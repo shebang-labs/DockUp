@@ -19,6 +19,7 @@ module Backends
 
     def upload_file(file)
       File.open(file) do |body|
+        file[0] = '' if file[0] == '/'
         client.put_object(bucket: bucket, key: file, body: body)
       end
     end
