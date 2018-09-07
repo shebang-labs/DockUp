@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 ruby '2.5.1'
 
-gem 'aws-sdk-s3', '~> 1.17.0'
+gem 'aws-sdk-s3', '~> 1.19.0'
 gem 'rake'
 
 group :development do
