@@ -39,8 +39,8 @@ docker run \
   -e "AWS_REGION=eu-west-1" \
   -e "AWS_BUCKET=some-bucket-name" \ # this should be unique and valid (https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html)
   -e "DockUpBackend=s3" \
-  -e "DockUpSrc=/upload" \
-  -v some_local_path:/upload \
+  -e "DockUpSrc=/backup" \
+  -v some_local_path_to_backup:/backup \ # some_local_path_to_backup could be a folder or file
   tareksamni/dockup:latest
 ```
 
@@ -57,9 +57,9 @@ services:
       - AWS_REGION=eu-west-1
       - AWS_BUCKET=some-bucket-name # this should be unique and valid (https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.ht
       - DockUpBackend=s3
-      - DockUpSrc=/upload
+      - DockUpSrc=/backup
     volumes:
-      - some_local_path:/upload
+      - some_local_path_to_backup:/backup
 ```
 
 ### Kubernetes example (Cron Job)
@@ -83,7 +83,7 @@ spec:
             image: tareksamni/dockup:tareksamni
             volumeMounts:
               - name: shared-data
-                mountPath: /upload
+                mountPath: /backup
             env:
               - name: AWS_ACCESS_KEY_ID
                 value: "your_aws_key_id"
@@ -96,7 +96,7 @@ spec:
               - name: DockUpBackend
                 value: "s3"
               - name: DockUpSrc
-                value: "/upload"
+                value: "/backup"
           restartPolicy: OnFailure
 ```
 
