@@ -14,6 +14,7 @@ module Backends
       super
       resource = Aws::S3::Resource.new(region: region)
       return if resource.bucket(bucket).exists?
+
       client.create_bucket(bucket: bucket)
     end
 
