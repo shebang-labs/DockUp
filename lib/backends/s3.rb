@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'aws-sdk-s3'
-require './lib/backends/base'
+require_relative 'base'
 
 module Backends
   class S3 < Base
