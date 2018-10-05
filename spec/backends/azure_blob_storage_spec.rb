@@ -106,6 +106,7 @@ describe Backends::AzureBlobStorage do
   end
 end
 
+# :nocov:
 class AzureMockResponse
   def initialize(code, body, headers)
     @status = code
@@ -131,3 +132,4 @@ class AzureMockResponse
     ''
   end
 end
+# :nocov:
