@@ -94,7 +94,6 @@ describe Backends::S3 do
 
   describe 'Backends::S3::PREREQUISITES' do
     it 'should have S3 required credentials and config' do
-      expect(Backends::S3::PREREQUISITES).to be_an(Array)
       expect(Backends::S3::PREREQUISITES).to match_array(
         %i[ AWS_ACCESS_KEY_ID
             AWS_SECRET_ACCESS_KEY
