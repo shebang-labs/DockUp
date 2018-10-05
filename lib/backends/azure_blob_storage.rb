@@ -2,6 +2,7 @@
 
 require 'azure/storage/blob'
 require_relative 'base'
+require 'byebug'
 
 module Backends
   class AzureBlobStorage < Base
