@@ -9,7 +9,7 @@ module Backends
       GCP_CREDENTIALS
       GCP_PROJECT_ID
       GCP_BUCKET_NAME
-     ].freeze
+    ].freeze
 
     def initialize
       super
@@ -33,7 +33,7 @@ module Backends
     end
 
     def bucket
-      if storage.get(bucket_name, Storage.BucketGetOption.fields()) == null
+      if storage.get(bucket_name, Storage.BucketGetOption.fields) == null
         storage.create_bucket bucket_name
       end
       @bucket ||= storage.bucket bucket_name
