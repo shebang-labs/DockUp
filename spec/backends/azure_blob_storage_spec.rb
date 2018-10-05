@@ -29,6 +29,22 @@ describe Backends::AzureBlobStorage do
       )
       subject
     end
+
+    it 'should create container if it does not exist' do
+      allow_any_instance_of(Azure::Storage::Blob::BlobService).to(
+        receive(:get_container_properties).and_raise(
+          Azure::Core::Http::HTTPError,
+          Azure::Core::Http::HttpResponse.new(
+            AzureMockResponse.new('200', '', {})
+          )
+        )
+      )
+
+      expect_any_instance_of(Azure::Storage::Blob::BlobService).to(
+        receive(:create_container).once
+      )
+      subject
+    end
   end
 
   describe '#client' do
@@ -87,5 +103,31 @@ describe Backends::AzureBlobStorage do
             AZURE_STORAGE_CONTAINER_NAME ]
       )
     end
+  end
+end
+
+class AzureMockResponse
+  def initialize(code, body, headers)
+    @status = code
+    @body = body
+    @headers = headers
+    @headers.each do |k, v|
+      @headers[k] = [v] unless v.respond_to? 'first'
+    end
+  end
+  attr_accessor :status
+  attr_accessor :body
+  attr_accessor :headers
+
+  def to_hash
+    @headers
+  end
+
+  def success?
+    true
+  end
+
+  def reason_phrase
+    ''
   end
 end
