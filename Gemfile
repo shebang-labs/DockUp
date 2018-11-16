@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 ruby '2.5.1'
 
-gem 'aws-sdk-s3', '~> 1.23.1'
+gem 'aws-sdk-s3', '~> 1.24.1'
 gem 'azure-storage-blob'
 gem 'rake'
 
