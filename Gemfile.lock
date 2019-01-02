@@ -70,7 +70,7 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.8.0)
     rspec-support (3.8.0)
-    rubocop (0.61.1)
+    rubocop (0.62.0)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
       parser (>= 2.5, != 2.5.1.1)
@@ -84,7 +84,7 @@ GEM
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.2)
-    unicode-display_width (1.4.0)
+    unicode-display_width (1.4.1)
 
 PLATFORMS
   ruby
@@ -97,7 +97,7 @@ DEPENDENCIES
   overcommit
   rake
   rspec
-  rubocop (~> 0.61.1)
+  rubocop (~> 0.62.0)
 
 RUBY VERSION
    ruby 2.5.1p57
