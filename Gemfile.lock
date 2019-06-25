@@ -42,7 +42,7 @@ GEM
       faraday (>= 0.7.4, < 1.0)
     ffi (1.10.0)
     iniparse (1.4.4)
-    jaro_winkler (1.5.2)
+    jaro_winkler (1.5.3)
     jmespath (1.4.0)
     json (2.1.0)
     mini_portile2 (2.4.0)
@@ -70,7 +70,7 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.8.0)
     rspec-support (3.8.0)
-    rubocop (0.71.0)
+    rubocop (0.72.0)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
       parser (>= 2.6)
@@ -96,7 +96,7 @@ DEPENDENCIES
   overcommit
   rake
   rspec
-  rubocop (~> 0.71.0)
+  rubocop (~> 0.72.0)
 
 RUBY VERSION
    ruby 2.5.1p57
