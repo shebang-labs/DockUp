@@ -10,7 +10,7 @@ gem 'rake'
 group :development do
   gem 'awesome_print'
   gem 'overcommit', require: false
-  gem 'rubocop', '~> 0.75.1', require: false
+  gem 'rubocop', '~> 0.76.0', require: false
 end
 
 group :test do
