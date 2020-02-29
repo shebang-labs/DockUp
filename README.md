@@ -1,8 +1,6 @@
 ![DockUp](https://github.com/shebang-labs/DockUp/raw/master/assets/logo.png "DockUp")
 
 [![CircleCI](https://circleci.com/gh/shebang-labs/DockUp/tree/master.svg?style=svg)](https://circleci.com/gh/shebang-labs/DockUp/tree/master) 
-[![Maintainability](https://api.codeclimate.com/v1/badges/a1eebc68dd2560570d76/maintainability)](https://codeclimate.com/github/shebang-labs/DockUp/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/a1eebc68dd2560570d76/test_coverage)](https://codeclimate.com/github/shebang-labs/DockUp/test_coverage)
 [![Docker Pulls](https://img.shields.io/docker/pulls/tareksamni/dockup.svg)](https://hub.docker.com/r/tareksamni/dockup/)
 [![Docker Stars](https://img.shields.io/docker/stars/tareksamni/dockup.svg)](https://hub.docker.com/r/tareksamni/dockup/)
 [![Docker Layers](https://images.microbadger.com/badges/image/tareksamni/dockup.svg)](https://hub.docker.com/r/tareksamni/dockup/)
@@ -21,7 +19,7 @@ Currently DockUp is supporting backups to:
 - [Amazon S3](https://aws.amazon.com/s3/)
 - [Microsoft Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/)
 
-Soon and incrementally we will be adding other backends like Azure blob storage, Google cloud storage and other backends. Feel free to [contribute to DockUp](https://github.com/tareksamni/DockUp/blob/master/docs/CONTRIBUTING.md) and add more backends.
+Soon and incrementally we will be adding other backends like Azure blob storage, Google cloud storage and other backends. Feel free to [contribute to DockUp](https://github.com/shebang-labs/DockUp/blob/master/docs/CONTRIBUTING.md) and add more backends.
 
 ## Getting Started
 
@@ -128,7 +126,7 @@ You can find DockUp's code of conduct [here](https://github.com/shebang-labs/Doc
 
 ## Code Status
 
-[![CircleCI](https://circleci.com/gh/tareksamni/DockUp/tree/master.svg?style=svg)](https://circleci.com/gh/tareksamni/DockUp/tree/master)
+[![CircleCI](https://circleci.com/gh/shebang-labs/DockUp/tree/master.svg?style=svg)](https://circleci.com/gh/shebang-labs/DockUp/tree/master)
 
 ## License
 
