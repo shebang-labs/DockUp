@@ -45,7 +45,7 @@ GEM
     json (2.1.0)
     mini_portile2 (2.4.0)
     multipart-post (2.0.0)
-    nokogiri (1.10.7)
+    nokogiri (1.10.8)
       mini_portile2 (~> 2.4.0)
     overcommit (0.51.0)
       childprocess (>= 0.6.3, < 4)
