@@ -42,7 +42,7 @@ GEM
     iniparse (1.4.4)
     jaro_winkler (1.5.4)
     jmespath (1.4.0)
-    json (2.1.0)
+    json (2.3.1)
     mini_portile2 (2.4.0)
     multipart-post (2.0.0)
     nokogiri (1.10.8)
